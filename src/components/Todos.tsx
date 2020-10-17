@@ -4,7 +4,11 @@ import { Text, Box, useInput } from 'ink'
 const todos = ['ご飯食べる', '歯を磨く', '寝る']
 const maxCursorIndex = todos.length - 1
 
-export const Todos: FC = () => {
+type Props = {
+  todos: string[]
+}
+
+export const Todos: FC<Props> = () => {
   const [cursorIndex, setCursorIndex] = useState(0)
 
   useInput((_, key) => {

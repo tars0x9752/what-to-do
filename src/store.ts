@@ -28,7 +28,7 @@ type StoreProvider = {
 export const storeProvider = (): StoreProvider => {
   const homedir = os.homedir()
 
-  const storePath = path.join(homedir, '.wtd-store.json')
+  const storePath = path.join(homedir, '.wtd-store')
 
   const load = () => {
     const jsonString = fs.readFileSync(storePath, 'utf8')
