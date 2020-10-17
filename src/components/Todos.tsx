@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import { render, Text, Box, useInput } from 'ink'
+import React, { FC, useState } from 'react'
+import { Text, Box, useInput } from 'ink'
 
 const todos = ['ご飯食べる', '歯を磨く', '寝る']
 const maxCursorIndex = todos.length - 1
 
-const Test = () => {
+export const Todos: FC = () => {
   const [cursorIndex, setCursorIndex] = useState(0)
 
   useInput((_, key) => {
@@ -36,5 +36,3 @@ const Test = () => {
     </Box>
   )
 }
-
-render(<Test />)
