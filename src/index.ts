@@ -1,11 +1,16 @@
 #!/usr/bin/env node
 
+import { storeProvider } from './store'
 import { ui } from './ui'
 
 export const exec = (): void => {
-  const [, , userInput] = process.argv
+  const [, , userInput] = process.argv as [string, string, string | undefined]
 
-  console.log(userInput ?? 'no user input')
+  const { write, load } = storeProvider()
+
+  write()
+
+  console.log(load().collections)
 }
 
 exec()
