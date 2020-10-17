@@ -8,6 +8,8 @@
     "lib/**/*"
   ],
   "scripts": {
+    "dev": "tsc -w",
+    "start": "node lib/index.js",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint . --ext .ts,.tsx",
@@ -20,6 +22,7 @@
   },
   "devDependencies": {
     "@types/jest": "^26.0.14",
+    "@types/react": "^16.9.52",
     "@typescript-eslint/eslint-plugin": "^4.3.0",
     "@typescript-eslint/parser": "^4.3.0",
     "eslint": "^7.10.0",
@@ -36,5 +39,9 @@
     "url": "repository url goes here"
   },
   "author": "tars0x9752",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "ink": "^3.0.7",
+    "react": "^16.14.0"
+  }
 }

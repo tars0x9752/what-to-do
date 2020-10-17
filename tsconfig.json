@@ -4,13 +4,14 @@
     "declaration": true,
     "target": "es5",
     "lib": ["DOM", "ES2015"],
+    "jsx": "react",
     "module": "commonjs",
     "moduleResolution": "node",
     "outDir": "lib",
     "rootDir": "src",
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/index.tsx"],
   "exclude": ["node_modules", "**/*.test.ts", "lib"]
 }
