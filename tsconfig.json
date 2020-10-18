@@ -3,6 +3,7 @@
     "strict": true,
     "declaration": true,
     "target": "es5",
+    "downlevelIteration": true,
     "lib": ["DOM", "ES2015"],
     "jsx": "react",
     "module": "commonjs",

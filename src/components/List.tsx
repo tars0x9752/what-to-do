@@ -1,14 +1,14 @@
 import React, { FC, useState } from 'react'
-import { Text, Box, useInput } from 'ink'
-
-const todos = ['ご飯食べる', '歯を磨く', '寝る']
-const maxCursorIndex = todos.length - 1
+import { Text, Box, Newline, useInput } from 'ink'
+import { Item } from '../types/Item'
 
 type Props = {
-  todos: string[]
+  items: Item[]
 }
 
-export const Todos: FC<Props> = () => {
+export const List: FC<Props> = ({ items }) => {
+  const maxCursorIndex = items.length - 1
+
   const [cursorIndex, setCursorIndex] = useState(0)
 
   useInput((_, key) => {
@@ -23,11 +23,11 @@ export const Todos: FC<Props> = () => {
 
   return (
     <Box flexDirection="column">
-      {todos.map((todo, i) => {
+      {items.map((todo, i) => {
         const selected = cursorIndex === i
 
         return (
-          <Box key={todo}>
+          <Box key={todo.task}>
             <Text color="cyanBright" bold={selected}>
               {selected ? '> ' : '  '}
             </Text>
@@ -37,6 +37,7 @@ export const Todos: FC<Props> = () => {
           </Box>
         )
       })}
+      <Newline />
     </Box>
   )
 }

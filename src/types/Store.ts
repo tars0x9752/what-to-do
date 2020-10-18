@@ -1,11 +1,17 @@
-import { Collection } from './Collection'
+import { Collection, CollectionConsumer } from './Collection'
 
 export type Store = {
   currentCollectionName: string
-  collections: Collection
+  collections: Collection[]
 }
 
 export type StoreConsumer = {
+  /** operations */
   init: () => void
-  getStore: () => Store
+  switchCollection: (collectionName: string) => void
+  createCollection: (collectionName: string) => void
+
+  /** data fetchers */
+  getCollectionNames: () => string[]
+  getCurrentCollection: () => CollectionConsumer
 }

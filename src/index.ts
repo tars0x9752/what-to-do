@@ -1,16 +1,21 @@
 #!/usr/bin/env node
 
-import { storeProvider } from './store'
-import { ui } from './ui'
+import { storeConsumer } from './store'
 
 export const exec = (): void => {
-  const [, , userInput] = process.argv as [string, string, string | undefined]
+  const {
+    init,
+    switchCollection,
+    createCollection,
+    getCollectionNames,
+    getCurrentCollection,
+  } = storeConsumer()
 
-  const { write, load } = storeProvider()
+  createCollection('ご飯')
 
-  write()
+  const { add, getItems, getItemMap, remove, updateStatus } = getCurrentCollection()
 
-  console.log(load().collections)
+  console.log(getCollectionNames())
 }
 
 exec()

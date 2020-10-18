@@ -6,12 +6,9 @@ export type Collection = {
 }
 
 export type CollectionConsumer = {
-  getTodoItems: () => string[]
-  getWIPItems: () => string[]
-  getDoneItems: () => string[]
+  getItems: () => Item[]
+  getItemMap: () => Map<string, TodoStatus>
   add: (task: string) => void
-  update: (task: string, status: TodoStatus) => void
+  updateStatus: (task: string, status: TodoStatus) => void
   remove: (task: string) => void
-  // flush
-  // archive
 }
