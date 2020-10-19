@@ -20,6 +20,10 @@
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
   },
+  "dependencies": {
+    "ink": "^3.0.7",
+    "react": "^16.14.0"
+  },
   "devDependencies": {
     "@types/jest": "^26.0.14",
     "@types/react": "^16.9.52",
@@ -39,10 +43,5 @@
     "url": "repository url goes here"
   },
   "author": "tars0x9752",
-  "license": "MIT",
-  "dependencies": {
-    "ink": "^3.0.7",
-    "ink-text-input": "^4.0.1",
-    "react": "^16.14.0"
-  }
+  "license": "MIT"
 }

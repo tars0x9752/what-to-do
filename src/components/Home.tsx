@@ -1,7 +1,5 @@
 import React, { FC, useState } from 'react'
 import { Text, Box, Spacer, useInput, useApp } from 'ink'
-import { UncontrolledTextInput } from 'ink-text-input'
-import { TaskInput } from './TaskInput'
 
 export const Home: FC = () => {
   const { exit } = useApp()
