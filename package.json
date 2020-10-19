@@ -42,6 +42,7 @@
   "license": "MIT",
   "dependencies": {
     "ink": "^3.0.7",
+    "ink-text-input": "^4.0.1",
     "react": "^16.14.0"
   }
 }
