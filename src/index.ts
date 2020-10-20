@@ -5,12 +5,11 @@ import { renderUI } from './ui'
 
 const helpText = `
 Usage
-  $ wtd [options]
+  $ wtd [options/args]
 
-Options
-  No args/options                 Display todo list UI
+Options/Args
+  No options/args                 Display todo list UI
   <task>                          Add a new task to the current collection
-  -a, --add <task>                Add a new task to the current collection
   -c, --create <collection_name>  Create a new collection 
   -h, --help                      Display this message
   -v, --version                   Display version number
@@ -18,10 +17,6 @@ Options
 
 const cli = meow(helpText, {
   flags: {
-    add: {
-      type: 'string',
-      alias: 'a',
-    },
     create: {
       type: 'string',
       alias: 'c',
@@ -52,10 +47,20 @@ const handleCreateOption = (collectionName: string | undefined) => {
 }
 
 export const exec = (): void => {
-  // renderUI()
-
-  const { add, create } = cli.flags
   const task = cli.input
+  const { create: collectionName } = cli.flags
+
+  if (collectionName !== undefined) {
+    console.log(`create a new collection "${collectionName}"`)
+    return
+  }
+
+  if (task.length > 0) {
+    console.log(`add a new task "${task}"`)
+    return
+  }
+
+  renderUI()
 }
 
 exec()
