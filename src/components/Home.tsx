@@ -13,10 +13,14 @@ export const Home: FC = () => {
     if (key.return) {
       exit()
     }
+
+    if (_ === 'q') {
+      exit()
+    }
   })
 
   return (
-    <Box flexDirection="column" minHeight={10}>
+    <Box flexDirection="column" minHeight={10} marginTop={1}>
       {/* Header */}
       <Box flexDirection="column">
         <Text bold={true}>Collection: {currentCollectionName} (1/1)</Text>
@@ -38,8 +42,11 @@ export const Home: FC = () => {
       <Box flexDirection="column">
         <Text>[ArrowUp/ArrowDown]: move cursor</Text>
         <Text>[ArrowLeft/ArrowRight]: change collection</Text>
-        <Text>[Space]: change task status</Text>
-        <Text>[Enter]: save and quit</Text>
+        <Text>[Tab or Enter]: change the task status</Text>
+        <Text>[Backspace]: delete the task</Text>
+        <Text>[ESC]: delete the collection</Text>
+        <Text>[q]: quit(auto save)</Text>
+        <Text>[a]: abort(quit without save)</Text>
       </Box>
     </Box>
   )

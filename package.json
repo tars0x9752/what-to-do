@@ -21,6 +21,7 @@
     "postversion": "git push && git push --tags"
   },
   "dependencies": {
+    "conf": "^7.1.2",
     "ink": "^3.0.7",
     "meow": "^7.1.1",
     "react": "^16.14.0"

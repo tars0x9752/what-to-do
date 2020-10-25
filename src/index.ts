@@ -2,6 +2,7 @@
 
 import meow from 'meow'
 import { renderUI } from './ui'
+import { Store, storeConsumer } from './store'
 
 const helpText = `
 Usage
@@ -60,7 +61,11 @@ export const exec = (): void => {
     return
   }
 
-  renderUI()
+  // renderUI()
+
+  const store = storeConsumer.store as Store
+
+  console.log(JSON.stringify(store, null, 2))
 }
 
 exec()

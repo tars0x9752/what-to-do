@@ -2,9 +2,9 @@
   "compilerOptions": {
     "strict": true,
     "declaration": true,
-    "target": "es5",
+    "target": "ES2018",
     "downlevelIteration": true,
-    "lib": ["DOM", "ES2015"],
+    "lib": ["DOM", "ES2018"],
     "jsx": "react",
     "module": "commonjs",
     "moduleResolution": "node",
