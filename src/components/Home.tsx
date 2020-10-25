@@ -1,13 +1,17 @@
 import React, { FC, useState } from 'react'
-import { Text, Box, Spacer, useInput, useApp } from 'ink'
+import { Text, Box, useInput, useApp } from 'ink'
+import { Store } from '../store'
+import { List } from './List'
 
-export const Home: FC = () => {
+type Props = {
+  store: Store
+}
+
+export const Home: FC<Props> = ({ store }) => {
   const { exit } = useApp()
 
-  const currentCollectionName = 'General'
-  const todoCount = 0
-  const doneCount = 0
-  const taskList = ['a sample task']
+  const todoCount = 0 // todo
+  const doneCount = 0 // todo
 
   useInput((_, key) => {
     if (key.return) {
@@ -23,7 +27,7 @@ export const Home: FC = () => {
     <Box flexDirection="column" minHeight={10} marginTop={1}>
       {/* Header */}
       <Box flexDirection="column">
-        <Text bold={true}>Collection: {currentCollectionName} (1/1)</Text>
+        <Text bold={true}>Collection: {'COLLECTION NAME (TODO)'} (1/1)</Text>
         <Box>
           <Text>Todo: {todoCount}</Text>
           <Box marginRight={2} />
@@ -32,11 +36,7 @@ export const Home: FC = () => {
       </Box>
 
       {/* Body */}
-      <Box paddingX={1} marginBottom={1} flexDirection="column" borderStyle="doubleSingle">
-        {taskList.map((task) => {
-          return <Text key={task}>{`  ${task}`}</Text>
-        })}
-      </Box>
+      <List items={store.collections[0].items ?? []} />
 
       {/* Guide */}
       <Box flexDirection="column">

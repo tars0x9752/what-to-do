@@ -2,14 +2,26 @@ import Conf from 'conf'
 import { Item } from './types/Item'
 
 export type Store = {
-  collections: Item[]
+  collections: {
+    name: string
+    items: Item[]
+  }[]
 }
 
 const store: Store = {
   collections: [
     {
-      task: 'a sample task',
-      status: 'todo',
+      name: 'default',
+      items: [
+        {
+          task: 'sample task 1',
+          status: 'todo',
+        },
+        {
+          task: 'sample task 2',
+          status: 'done',
+        },
+      ],
     },
   ],
 }

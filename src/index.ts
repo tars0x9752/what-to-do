@@ -33,20 +33,6 @@ const cli = meow(helpText, {
   },
 })
 
-const handleCreateOption = (collectionName: string | undefined) => {
-  if (collectionName === undefined) {
-    return
-  }
-
-  if (collectionName.length <= 0) {
-    console.log('collection name required')
-    return
-  }
-
-  // invoke create collection
-  return true
-}
-
 export const exec = (): void => {
   const task = cli.input
   const { create: collectionName } = cli.flags
@@ -61,11 +47,11 @@ export const exec = (): void => {
     return
   }
 
-  // renderUI()
+  renderUI(storeConsumer.store as Store)
 
-  const store = storeConsumer.store as Store
+  // const store = storeConsumer.store as Store
 
-  console.log(JSON.stringify(store, null, 2))
+  // console.log(JSON.stringify(store, null, 2))
 }
 
 exec()

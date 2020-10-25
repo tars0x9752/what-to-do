@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react'
-import { Text, Box, Newline, useInput } from 'ink'
+import { Box, useInput } from 'ink'
 import { Item } from '../types/Item'
+import { ListItem } from './ListItem'
 
 type Props = {
   items: Item[]
@@ -22,22 +23,12 @@ export const List: FC<Props> = ({ items }) => {
   })
 
   return (
-    <Box flexDirection="column">
-      {items.map((todo, i) => {
-        const selected = cursorIndex === i
+    <Box padding={1} marginBottom={1} flexDirection="column">
+      {items.map((item, index) => {
+        const selected = cursorIndex === index
 
-        return (
-          <Box key={todo.task}>
-            <Text color="cyanBright" bold={selected}>
-              {selected ? '> ' : '  '}
-            </Text>
-            <Text color={'cyan'} bold={selected}>
-              {todo}
-            </Text>
-          </Box>
-        )
+        return <ListItem key={item.task} selected={selected} item={item} />
       })}
-      <Newline />
     </Box>
   )
 }
