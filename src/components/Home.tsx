@@ -1,17 +1,38 @@
 import React, { FC, useState } from 'react'
 import { Text, Box, useInput, useApp } from 'ink'
-import { Store } from '../store'
+import { Store, storeConsumer } from '../store'
 import { List } from './List'
+import { Item } from '../types/Item'
 
-type Props = {
-  store: Store
-}
-
-export const Home: FC<Props> = ({ store }) => {
+export const Home: FC = () => {
   const { exit } = useApp()
+  const [store, setStore] = useState(storeConsumer.store as Store)
 
-  const todoCount = 0 // todo
-  const doneCount = 0 // todo
+  const onItemUpdate = (itemIndex: number) => {
+    const items = store.collections[0].items.map((item, index) => {
+      if (index === itemIndex) {
+        return {
+          ...item,
+          status: item.status === 'done' ? 'todo' : 'done',
+        }
+      }
+      return item
+    }) as Item[]
+
+    const collections = store.collections.map((collection, index) => {
+      return {
+        ...collection,
+        items,
+      }
+    })
+
+    const newStore = {
+      collections,
+    }
+
+    setStore(newStore)
+    storeConsumer.store = newStore
+  }
 
   useInput((_, key) => {
     if (key.return) {
@@ -29,14 +50,14 @@ export const Home: FC<Props> = ({ store }) => {
       <Box flexDirection="column">
         <Text bold={true}>Collection: {'COLLECTION NAME (TODO)'} (1/1)</Text>
         <Box>
-          <Text>Todo: {todoCount}</Text>
+          <Text>Todo: {0}</Text>
           <Box marginRight={2} />
-          <Text>Done: {doneCount}</Text>
+          <Text>Done: {0}</Text>
         </Box>
       </Box>
 
       {/* Body */}
-      <List items={store.collections[0].items ?? []} />
+      <List items={store.collections[0].items ?? []} onItemUpdate={onItemUpdate} />
 
       {/* Guide */}
       <Box flexDirection="column">

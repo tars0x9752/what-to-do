@@ -1,5 +1,5 @@
-import React, { FC, useState } from 'react'
-import { Text, Box, Newline, useInput } from 'ink'
+import React, { FC } from 'react'
+import { Text, Box } from 'ink'
 import fig from 'figures'
 import { Item } from '../types/Item'
 
@@ -10,8 +10,8 @@ type Props = {
 
 export const ListItem: FC<Props> = ({ item, selected = false }) => {
   const cursor = selected ? fig.pointer : ' '
-  const status = item.status === 'todo' ? '_' : fig.tick
   const isDone = item.status === 'done'
+  const status = isDone ? fig.tick : '_'
 
   return (
     <Box>

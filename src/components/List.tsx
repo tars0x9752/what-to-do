@@ -2,12 +2,14 @@ import React, { FC, useState } from 'react'
 import { Box, useInput } from 'ink'
 import { Item } from '../types/Item'
 import { ListItem } from './ListItem'
+import { Store, storeConsumer } from '../store'
 
 type Props = {
   items: Item[]
+  onItemUpdate: (cursorIndex: number) => void
 }
 
-export const List: FC<Props> = ({ items }) => {
+export const List: FC<Props> = ({ items, onItemUpdate }) => {
   const maxCursorIndex = items.length - 1
 
   const [cursorIndex, setCursorIndex] = useState(0)
@@ -19,6 +21,10 @@ export const List: FC<Props> = ({ items }) => {
 
     if (key.upArrow) {
       setCursorIndex((i) => Math.max(i - 1, 0))
+    }
+
+    if (key.tab) {
+      onItemUpdate(cursorIndex)
     }
   })
 

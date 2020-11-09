@@ -30,4 +30,4 @@ export const storeConsumer = new Conf({
   configName: 'store',
 })
 
-storeConsumer.store = store
+// storeConsumer.store = store

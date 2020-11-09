@@ -2,7 +2,6 @@
 
 import meow from 'meow'
 import { renderUI } from './ui'
-import { Store, storeConsumer } from './store'
 
 const helpText = `
 Usage
@@ -18,10 +17,10 @@ Options/Args
 
 const cli = meow(helpText, {
   flags: {
-    create: {
-      type: 'string',
-      alias: 'c',
-    },
+    // create: {
+    //   type: 'string',
+    //   alias: 'c',
+    // },
     version: {
       type: 'boolean',
       alias: 'v',
@@ -47,7 +46,7 @@ export const exec = (): void => {
     return
   }
 
-  renderUI(storeConsumer.store as Store)
+  renderUI()
 
   // const store = storeConsumer.store as Store
 
