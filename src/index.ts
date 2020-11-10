@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import meow from 'meow'
+import { Store, storeConsumer } from './store'
 import { renderUI } from './ui'
 
 const helpText = `
@@ -9,18 +10,13 @@ Usage
 
 Options/Args
   No options/args                 Display todo list UI
-  <task>                          Add a new task to the current collection
-  -c, --create <collection_name>  Create a new collection 
+  <task>                          Add a new task
   -h, --help                      Display this message
   -v, --version                   Display version number
 `
 
 const cli = meow(helpText, {
   flags: {
-    // create: {
-    //   type: 'string',
-    //   alias: 'c',
-    // },
     version: {
       type: 'boolean',
       alias: 'v',
@@ -34,23 +30,21 @@ const cli = meow(helpText, {
 
 export const exec = (): void => {
   const task = cli.input
-  const { create: collectionName } = cli.flags
-
-  if (collectionName !== undefined) {
-    console.log(`create a new collection "${collectionName}"`)
-    return
-  }
+  const store = storeConsumer.store as Store
 
   if (task.length > 0) {
-    console.log(`add a new task "${task}"`)
-    return
+    storeConsumer.store = {
+      items: [
+        ...store.items,
+        {
+          status: 'todo',
+          task,
+        },
+      ],
+    } as Store
   }
 
   renderUI()
-
-  // const store = storeConsumer.store as Store
-
-  // console.log(JSON.stringify(store, null, 2))
 }
 
 exec()

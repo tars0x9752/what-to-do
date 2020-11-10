@@ -5,7 +5,7 @@ export type Store = {
   items: Item[]
 }
 
-const store: Store = {
+const defaults: Store = {
   items: [
     {
       task: 'sample task 1',
@@ -15,11 +15,14 @@ const store: Store = {
       task: 'sample task 2',
       status: 'done',
     },
+    {
+      task: 'sample task 3',
+      status: 'done',
+    },
   ],
 }
 
 export const storeConsumer = new Conf({
   configName: 'store',
+  defaults,
 })
-
-// storeConsumer.store = store
