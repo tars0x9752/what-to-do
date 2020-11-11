@@ -11,12 +11,17 @@ Usage
 Options/Args
   No options/args                 Display todo list UI
   <task>                          Add a new task
+  -p, --path                      Display store file path
   -h, --help                      Display this message
   -v, --version                   Display version number
 `
 
 const cli = meow(helpText, {
   flags: {
+    path: {
+      type: 'boolean',
+      alias: 'p',
+    },
     version: {
       type: 'boolean',
       alias: 'v',
@@ -32,6 +37,13 @@ export const exec = (): void => {
   const task = cli.input
   const store = storeConsumer.store as Store
 
+  /** handle path flag */
+  if (cli.flags.path) {
+    console.log(storeConsumer.path)
+    return
+  }
+
+  /** handle task input */
   if (task.length > 0) {
     storeConsumer.store = {
       items: [
@@ -44,6 +56,7 @@ export const exec = (): void => {
     } as Store
   }
 
+  /** display ui */
   renderUI()
 }
 

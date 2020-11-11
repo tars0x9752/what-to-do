@@ -56,11 +56,7 @@ export const Home: FC = () => {
     <>
       <Box flexDirection="column" minHeight={10} marginTop={1}>
         {/* Header */}
-        <Box>
-          <Text>Todo: {0}</Text>
-          <Box marginRight={2} />
-          <Text>Done: {0}</Text>
-        </Box>
+        <Box></Box>
 
         {/* Body */}
         <List items={store.items ?? []} cursor={cursor} />
