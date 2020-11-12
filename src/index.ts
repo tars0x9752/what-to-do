@@ -43,18 +43,17 @@ export const exec = (): void => {
   const inputTasks = cli.input
   const store = storeConsumer.store as Store
 
+  /** handle path flag */
+  if (cli.flags.path) {
+    console.log(storeConsumer.path)
+    return
+  }
+
   /** handle clear flag */
   if (cli.flags.clear) {
     storeConsumer.store = {
       items: store.items.filter((item) => item.status === 'todo'),
     }
-    return
-  }
-
-  /** handle path flag */
-  if (cli.flags.path) {
-    console.log(storeConsumer.path)
-    return
   }
 
   /** handle task input */

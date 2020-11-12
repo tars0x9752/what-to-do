@@ -78,10 +78,10 @@ export const Home: FC = () => {
 
         {/* Guide */}
         <Box flexDirection="column">
-          <Text>[ENTER]: toggle task status</Text>
-          <Text>[r or BACKSPACE]: remove task</Text>
-          <Text>[q or ESC]: save and quit</Text>
-          <Text>[Q]: abort(quit without save)</Text>
+          <Text>{'[ENTER]    toggle task status'}</Text>
+          <Text>{'[r]        remove the task'}</Text>
+          <Text>{'[q]        save and quit'}</Text>
+          <Text>{'[Q]        abort'}</Text>
         </Box>
       </Box>
     </>
