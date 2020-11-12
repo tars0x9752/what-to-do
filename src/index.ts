@@ -2,6 +2,7 @@
 
 import meow from 'meow'
 import { Store, storeConsumer } from './store'
+import { TodoStatus } from './types/Item'
 import { renderUI } from './ui'
 
 const helpText = `
@@ -10,7 +11,7 @@ Usage
 
 Options/Args
   No options/args                 Display todo list UI
-  <task>                          Add a new task
+  [task...]                       Add new tasks
   -p, --path                      Display store file path
   -h, --help                      Display this message
   -v, --version                   Display version number
@@ -34,7 +35,7 @@ const cli = meow(helpText, {
 })
 
 export const exec = (): void => {
-  const task = cli.input
+  const inputTasks = cli.input
   const store = storeConsumer.store as Store
 
   /** handle path flag */
@@ -44,15 +45,17 @@ export const exec = (): void => {
   }
 
   /** handle task input */
-  if (task.length > 0) {
+  if (inputTasks.length > 0) {
+    const itemMap = new Map<string, TodoStatus>(
+      store.items.map(({ task, status }) => [task, status])
+    )
+
+    inputTasks.map((inputTask) => {
+      itemMap.set(inputTask, 'todo')
+    })
+
     storeConsumer.store = {
-      items: [
-        ...store.items,
-        {
-          status: 'todo',
-          task,
-        },
-      ],
+      items: [...itemMap].map(([task, status]) => ({ task, status })),
     } as Store
   }
 

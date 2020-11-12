@@ -10,7 +10,7 @@ export const Home: FC = () => {
   const maxcursor = store.items.length - 1
   const [cursor, setCursor] = useState(0)
 
-  const handleItemUpdate = (itemIndex: number) => {
+  const toggleTaskStatus = (itemIndex: number) => {
     const items = store.items.map((item, index) => {
       if (index === itemIndex) {
         return {
@@ -28,7 +28,18 @@ export const Home: FC = () => {
     setStore(newStore)
   }
 
-  useInput((_, key) => {
+  const removeTask = (itemIndex: number) => {
+    const items = store.items.filter((_, index) => index !== itemIndex)
+
+    const newStore = {
+      items,
+    }
+
+    setStore(newStore)
+  }
+
+  useInput((input, key) => {
+    /** cursor */
     if (key.downArrow) {
       setCursor((i) => Math.min(i + 1, maxcursor))
     }
@@ -37,33 +48,40 @@ export const Home: FC = () => {
       setCursor((i) => Math.max(i - 1, 0))
     }
 
-    if (key.return) {
+    /** toggle status */
+    if (key.return || input === ' ' || key.tab) {
+      toggleTaskStatus(cursor)
+    }
+
+    /** remove */
+    if (input === 'r' || key.backspace || key.delete) {
+      removeTask(cursor)
+    }
+
+    /** quit */
+    if (input === 'q' || key.escape) {
       storeConsumer.store = store
       exit()
     }
 
-    if (_ === 'q') {
-      storeConsumer.store = store
+    /** abort */
+    if (input === 'Q') {
       exit()
-    }
-
-    if (key.tab) {
-      handleItemUpdate(cursor)
     }
   })
 
   return (
     <>
       <Box flexDirection="column" minHeight={10} marginTop={1}>
-        {/* Header */}
-        <Box></Box>
-
         {/* Body */}
         <List items={store.items ?? []} cursor={cursor} />
 
         {/* Guide */}
         <Box flexDirection="column">
-          <Text>[q or Enter(Return)]: save and quit</Text>
+          <Text>[ENTER]: toggle task status</Text>
+          <Text>[r or BACKSPACE]: remove task</Text>
+          <Text>[q or ESC]: save and quit</Text>
+          <Text>[Q]: abort(quit without save)</Text>
         </Box>
       </Box>
     </>
