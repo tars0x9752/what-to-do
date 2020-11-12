@@ -12,6 +12,7 @@ Usage
 Options/Args
   No options/args                 Display todo list UI
   [task...]                       Add new tasks
+  -c, --clear                     Clear away all done tasks
   -p, --path                      Display store file path
   -h, --help                      Display this message
   -v, --version                   Display version number
@@ -19,6 +20,10 @@ Options/Args
 
 const cli = meow(helpText, {
   flags: {
+    clear: {
+      type: 'boolean',
+      alias: 'c',
+    },
     path: {
       type: 'boolean',
       alias: 'p',
@@ -37,6 +42,14 @@ const cli = meow(helpText, {
 export const exec = (): void => {
   const inputTasks = cli.input
   const store = storeConsumer.store as Store
+
+  /** handle clear flag */
+  if (cli.flags.clear) {
+    storeConsumer.store = {
+      items: store.items.filter((item) => item.status === 'todo'),
+    }
+    return
+  }
 
   /** handle path flag */
   if (cli.flags.path) {
